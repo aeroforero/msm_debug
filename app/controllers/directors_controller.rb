@@ -1,10 +1,13 @@
 class DirectorsController < ApplicationController
   def index
-    directors = Director.all
+    @director = Director.all
+    render("/directors/index.html.erb")
   end
 
   def show
     @director = Director.find(params[:id])
+    render("directors/show_details.html.erb")
+
   end
 
   def new
@@ -36,7 +39,7 @@ class DirectorsController < ApplicationController
 
     @director.save
 
-    render("show")
+    redirect_to("/directors/#{@director.id}")
   end
 
   def destroy
