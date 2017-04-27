@@ -24,19 +24,19 @@ class ActorsController < ApplicationController
 
   def edit_form
     @actor = Actor.find(params[:id])
+    render("/actors/edit_form.html.erb")
   end
 
   def update_row
-    @actor = Actor.find(params[:id])
+    a = Actor.find(params[:id])
 
-    @actor.dob = params[:dob]
-    @actor.name = params[:name]
-    @actor.bio = params[:bio]
-    @actor.image_url = params[:image_url]
+    a.dob = params[:dob]
+    a.name = params[:name]
+    a.bio = params[:bio]
+    a.image_url = params[:image_url]
+    a.save
 
-    @actor.save
-
-    render("show")
+    redirect_to("/actors/#{a.id}")
   end
 
   def destroy
